@@ -1,13 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
+vector <int> a;
+void insert(int n){
+	if(n>1000) return;
+a.push_back(n*10+4); insert(n*10+4);
+a.push_back(n*10+7); insert(n*10+7);
+}
 int main(){
-	string n;
-	cin>>n;
-	int flag=0;
-	
-	if(n.find_first_not_of("47")>n.length()) flag=1;
+int n,flag=0;
 
-	if(flag==0) cout<<"YES";
-	else if(flag==1&&(((stoi(n)%4==0)&&(stoi(n)/4)%2==0)||(stoi(n)%7==0)&&(stoi(n)/7)%2==0)) cout<<"YES";
-	else cout<<flag;
+cin>>n;
+insert(0);
+for(auto it=a.begin();it!=a.end();it++) {
+	if(n%(*it)==0) flag=1;
+}
+if(flag==0) cout<<"NO";
+else cout<<"YES";
 }
