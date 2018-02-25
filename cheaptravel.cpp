@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-	float n,m,a,b;
+	int n,m,a,b;
 	cin>>n>>m>>a>>b;
-	float sum1=0,sum2=0;
+	int sum1=0,sum2=0,sum3;
 	sum1=n*a;
-	sum2=ceil(b/m);
-	sum2=sum2*n;
-	if(sum1<sum2) cout<<(int)ceil(sum1);
-	else cout<<(int)ceil(sum2);
+	if(a*m<=b){ cout<<sum1; return 0;}
+	sum2=n/m*b+b;
+	sum3=n/m*b+n%m*a;
+	cout<<min(sum2,sum3);
 }
