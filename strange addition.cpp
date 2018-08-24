@@ -1,24 +1,50 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-	int n,i;
-	string s[n];
-	list<string> z,nz;
+	int n,i,j=0,c=0,k=INT_MAX,temp,mod,num,nz=0;
+	map<int,int> check;
+	
 	cin>>n;
+	vector<int> z(n);
+	int s[n];
 	for(i=0;i<n;i++) cin>>s[i];
 	for(i=0;i<n;i++){
-		if(count(s[i].begin(),s[i].end(),'0')>0) z.push_back(s[i]);
-		else nz.push_back(s[i]);
+		c=0;
+		num=0;
+		temp=s[i];
+		if(temp==0) {
+		z[j++]=0;
+		continue;
 	}
-	int min1=min(z.size(),nz.size());
-	int max1=max(z.size(),nz.size());
-	int ans=2*min1;
-	if(max1==z.size()) ans+=max1-min1;
-	cout<<ans<<endl;
-	list<string>::iterator it1,it2;
-	for(it1=z.begin(),it2=nz.begin();it1!=z.end()&&it2!=nz.end();it1++,it2++) cout<<*it1<<" "<<*it2;
-	while(it1!=z.end()&&next(it1)!=z.end()){
-		cout<<*it1<<" "<<*(next(it1));
-		it1=(next(it1))++;
+		while(temp){
+			mod=temp%10;
+			temp/=10;
+			num++;
+			
+			if(mod==0) c++;
+		}
+		if(c==0&&check[0]==0){
+			if(k>num) {
+			k=num;
+			nz=s[i];
+		}
+		}
+	
+		if(num==c+1&&check[c]==0) {
+			check[c]=1;
+			z[j++]=s[i];
+		}
+		
+		
 	}
+	if(check[0]==0&&nz!=0){
+		for(i=1;i<k;i++){
+			if(check[i]==1) break;
+		}
+		if(i==k) z[j++]=nz;
+	}
+	cout<<j<<endl;
+	for(i=0;i<j;i++) cout<<z[i]<<" ";
 }
+	
+
